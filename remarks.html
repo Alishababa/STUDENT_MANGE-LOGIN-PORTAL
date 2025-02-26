@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Remarks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #3fa234;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .remarks {
+            margin: 20px 0;
+            text-align: left;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Student Remarks</h2>
+        <div class="remarks">
+            <p><strong>John Doe:</strong> Excellent performance in Mathematics.</p>
+            <p><strong>Jane Smith:</strong> Needs improvement in Science.</p>
+            <p><strong>Michael Brown:</strong> Great participation in class discussions.</p>
+        </div>
+        <button onclick="goBack()">Back to Dashboard</button>
+    </div>
+    
+    <script>
+        function goBack() {
+            window.location.href = 'dashboard.html'; // Change this to your actual dashboard URL
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>No Due Tracking System</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        .tracking-container {
+            max-width: 600px;
+            margin: 100px auto;
+            text-align: center;
+        }
+        .progress {
+            height: 25px;
+            background-color: #e9ecef;
+        }
+        .progress-bar {
+            transition: width 1s ease-in-out;
+        }
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+            margin-bottom: 30px;
+        }
+        .step i {
+            font-size: 30px;
+            color: #007bff;
+            margin-bottom: 20%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container tracking-container">
+        <h2>No Due Tracking System</h2>
+        
+        <div class="progress">
+            <div class="progress-bar bg-success" role="progressbar" style="width: 0%;" id="progress-bar"></div>
+        </div>
+        
+        <div class="row mt-3">
+            <div class="col step">
+                <i class="fas fa-university"></i>
+                <p>Department</p>
+            </div>
+            <div class="col step">
+                <i class="fas fa-book"></i>
+                <p>Library</p>
+            </div>
+            <div class="col step">
+                <i class="fas fa-money-bill"></i>
+                <p>College Fee</p>
+            </div>
+            <div class="col step">
+                <i class="fas fa-bed"></i>
+                <p>Hostel</p>
+            </div>
+        </div>
+        
+        <table class="table table-bordered mt-4">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Department Clearance</td>
+                    <td><span class="badge badge-danger" id="department-status">Pending</span></td>
+                </tr>
+                <tr>
+                    <td>Library Due</td>
+                    <td><span class="badge badge-danger" id="library-status">Pending</span></td>
+                </tr>
+                <tr>
+                    <td>College Fee</td>
+                    <td><span class="badge badge-danger" id="college-status">Pending</span></td>
+                </tr>
+                <tr>
+                    <td>Hostel Due</td>
+                    <td><span class="badge badge-danger" id="hostel-status">Pending</span></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <button class="btn btn-primary" id="updateStatus">Update Status</button>
+        
+        <div id="noDueSection" class="mt-4" style="display: none;">
+            <p class="text-success font-weight-bold">All dues are cleared! You can now download your No Due Form.</p>
+            <button class="btn btn-success" id="downloadForm">Download No Due Form</button>
+        </div>
+        <button class="btn btn-secondary mt-3" id="backToDashboard">Back to Dashboard</button>
+    </div>
+    
+    <script>
+        document.getElementById("updateStatus").addEventListener("click", function() {
+            document.getElementById("department-status").classList.replace("badge-danger", "badge-success");
+            document.getElementById("department-status").textContent = "Cleared";
+            
+            document.getElementById("library-status").classList.replace("badge-danger", "badge-success");
+            document.getElementById("library-status").textContent = "Cleared";
+            
+            document.getElementById("college-status").classList.replace("badge-danger", "badge-success");
+            document.getElementById("college-status").textContent = "Cleared";
+            
+            document.getElementById("hostel-status").classList.replace("badge-danger", "badge-success");
+            document.getElementById("hostel-status").textContent = "Cleared";
+            
+            document.getElementById("progress-bar").style.width = "100%";
+            document.getElementById("noDueSection").style.display = "block";
+        });
+        
+        document.getElementById("downloadForm").addEventListener("click", function() {
+            const { jsPDF } = window.jspdf;
+            let doc = new jsPDF();
+            doc.text("Central University of Tamil Nadu - No Due Form", 20, 20);
+            doc.text("All dues have been cleared.", 20, 40);
+            doc.save("No_Due_Form.pdf");
+        });
+        
+        document.getElementById("backToDashboard").addEventListener("click", function() {
+            window.location.href = "dashboard.html";
+        });
+    </script>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Due</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #3f8d61;
+      margin: 20px;
+    }
+    .library-container {
+      background: white;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #007bff;
+      color: white;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 15px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="library-container">
+    <header>
+      <h1>Library Due Information</h1>
+      <button onclick="goBack()">Back to Dashboard</button>
+    </header>
+    <table>
+      <thead>
+        <tr>
+          <th>Book Title</th>
+          <th>Starting Date</th>
+          <th>Due Date</th>
+          <th>Due Amount (Rs)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Advanced Math</td><td>01/10/2025</td><td>02/15/2025</td><td>5.00</td></tr>
+        <tr><td>Physics Fundamentals</td><td>01/15/2025</td><td>02/20/2025</td><td>7.50</td></tr>
+        <tr><td>Chemistry Essentials</td><td>01/20/2025</td><td>02/25/2025</td><td>6.00</td></tr>
+        <tr><td>History of Science</td><td>01/25/2025</td><td>03/01/2025</td><td>4.50</td></tr>
+      </tbody>
+    </table>
+    <h3>Total Due Amount: <span id="totalDue"></span></h3>
+  </div>
+  <script>
+    function goBack() {
+      window.location.href = 'dashboard.html';
+    }
+    function calculateTotalDue() {
+      let total = 0;
+      document.querySelectorAll("tbody tr").forEach(row => {
+        total += parseFloat(row.cells[3].innerText);
+      });
+      document.getElementById("totalDue").innerText = "Rs." + total.toFixed(2);
+    }
+    calculateTotalDue();
+  </script>
+</body>
+</html>

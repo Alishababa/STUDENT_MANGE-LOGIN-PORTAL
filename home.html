@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #ad5159;
+            color: #343a40;
+        }
+        .home-container {
+            max-width: 600px;
+            margin: 50px auto;
+            text-align: center;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+        }
+        .btn-custom {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            transition: 0.3s;
+        }
+        .btn-custom:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container home-container">
+        <header>
+            <h1>Student Details</h1>
+            <button class="btn btn-secondary" id="backBtn">Back to Dashboard</button>
+        </header>
+
+        <div class="table-container">
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Field</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Student Name</td><td id="studentName">hari</td></tr>
+                    <tr><td>ID Number</td><td id="studentId">123456</td></tr>
+                    <tr><td>Phone Number</td><td id="phoneNumber">+1234567890</td></tr>
+                    <tr><td>Email ID</td><td id="emailId">hari@example.com</td></tr>
+                    <tr><td>Department</td><td id="department">Computer Science</td></tr>
+                    <tr><td>Date of Birth</td><td id="dob">01-01-2000</td></tr>
+                    <tr><td>Parent Details</td><td id="parentDetails">ram</td></tr>
+                    <tr><td>Alternative Number</td><td id="altNumber">+0987654321</td></tr>
+                </tbody>
+            </table>
+            <button class="btn btn-custom" id="editStudentBtn">Edit Student</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("backBtn").addEventListener("click", function() {
+            window.location.href = "dashboard.html";
+        });
+
+        document.getElementById("editStudentBtn").addEventListener("click", function() {
+            let fields = ["studentName", "studentId", "phoneNumber", "emailId", "department", "dob", "parentDetails", "altNumber"];
+            
+            fields.forEach(id => {
+                let element = document.getElementById(id);
+                let newValue = prompt("Edit " + element.parentNode.firstChild.textContent + ":", element.textContent);
+                if (newValue !== null) {
+                    element.textContent = newValue;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

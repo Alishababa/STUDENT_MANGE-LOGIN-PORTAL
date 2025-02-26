@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Results</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f4f4f4;
+      margin: 20px;
+    }
+    .results-container {
+      background: white;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #007bff;
+      color: white;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 15px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="results-container">
+    <header>
+      <h1>Your Results</h1>
+      <button onclick="goBack()">Back to Dashboard</button>
+      <button onclick="downloadSemesterPDF(1)">Download Semester 1 PDF</button>
+      <button onclick="downloadSemesterPDF(2)">Download Semester 2 PDF</button>
+      <button onclick="downloadSemesterPDF(3)">Download Semester 3 PDF</button>
+    </header>
+    <div>
+      <h2>Semester Results</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Semester</th>
+            <th>Subject</th>
+            <th>Grade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Math</td><td>A</td></tr>
+          <tr><td>1</td><td>Science</td><td>B+</td></tr>
+          <tr><td>1</td><td>English</td><td>A-</td></tr>
+          <tr><td>2</td><td>Physics</td><td>B</td></tr>
+          <tr><td>2</td><td>Chemistry</td><td>A</td></tr>
+          <tr><td>2</td><td>Biology</td><td>B-</td></tr>
+          <tr><td>3</td><td>Computer Science</td><td>A+</td></tr>
+          <tr><td>3</td><td>Statistics</td><td>B+</td></tr>
+          <tr><td>3</td><td>History</td><td>A</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+  <script>
+    function goBack() {
+      window.location.href = 'dashboard.html';
+    }
+    function downloadSemesterPDF(semester) {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      doc.text(`Semester ${semester} Results`, 10, 10);
+      let y = 20;
+      document.querySelectorAll("tbody tr").forEach(row => {
+        if (row.cells[0].innerText == semester) {
+          let text = Array.from(row.cells).map(cell => cell.innerText).join(" - ");
+          doc.text(text, 10, y);
+          y += 10;
+        }
+      });
+      doc.save(`Semester_${semester}_Results.pdf`);
+    }
+  </script>
+</body>
+</html>

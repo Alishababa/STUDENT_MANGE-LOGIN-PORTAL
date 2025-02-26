@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fee Due</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #913b3b;
+      margin: 20px;
+    }
+    .fee-container {
+      background: white;
+      padding: 20px;
+      max-width: 700px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    input, button {
+      display: block;
+      width: 95%;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .fee-options {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+    .fee-btn {
+      width: 45%;
+      margin: 5px;
+      padding: 10px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .fee-btn:hover {
+      background-color: #218838;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="fee-container">
+    <header>
+      <h1>Fee Due Information</h1>
+      <button onclick="goBack()">Back to Dashboard</button>
+    </header>
+    <div class="student-info">
+      <label for="name">Name:</label>
+      <input type="text" id="name" placeholder="Enter your name">
+      
+      <label for="department">Department:</label>
+      <input type="text" id="department" placeholder="Enter your department">
+      
+      <label for="semester">Semester:</label>
+      <input type="text" id="semester" placeholder="Enter your semester">
+    </div>
+    <div class="fee-options">
+      <button class="fee-btn" data-type="exam" onclick="showForm('Exam Fees')">Exam Fees</button>
+      <button class="fee-btn" data-type="college" onclick="showForm('College Fees')">College Fees</button>
+      <button class="fee-btn" data-type="supply" onclick="showForm('Supply Fees')">Supply Fees</button>
+      <button class="fee-btn" data-type="hostel" onclick="showForm('Hostel Fees')">Hostel Fees</button>
+      <button class="fee-btn" data-type="library" onclick="showForm('Library Fees')">Library Fees</button>
+      <button class="fee-btn" data-type="damage" onclick="showForm('Damage Due')">Damage Due</button>
+    </div>
+    <div id="fee-form-container" class="hidden">
+      <h2 id="fee-title"></h2>
+      <label for="amount">Amount to Pay:</label>
+      <input type="number" id="amount" placeholder="Enter amount">
+      <button id="payBtn">Pay Now</button>
+    </div>
+  </div>
+  <script>
+    function goBack() {
+      window.location.href = 'dashboard.html';
+    }
+    function showForm(feeType) {
+      document.getElementById('fee-title').innerText = feeType;
+      document.getElementById('fee-form-container').classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Login</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+ 
+  <div class="login-container">
+    <!-- Login Image -->
+    <img src="C:\Users\abc\Downloads\loginstudent-20250224T083838Z-001\loginstudent\logo.png" alt="Login" class="login-image">
+
+    <h2>Login to your account</h2>
+    <form id="loginForm">
+      <div class="input-group">
+        <label for="username">Student ID</label>
+        <input type="text" id="username" name="username" required>
+      </div>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      <button type="submit" id="loginBtn">Login</button>
+      <p id="error-message" style="color: red; display: none;">Invalid username or password.</p>
+    </form>
+
+    <!-- Create Account Link -->
+    <p>Don't have an account? <a href="register.html">Create an account</a></p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html> 

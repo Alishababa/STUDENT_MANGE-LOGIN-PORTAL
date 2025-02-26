@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Details Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #2aa1ac;
+            margin: 20px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            max-width: 500px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Bank Details Form</h2>
+        <form id="bankForm">
+            <label for="holderName">Account Holder Name:</label>
+            <input type="text" id="holderName" required>
+
+            <label for="bankName">Bank Name:</label>
+            <input type="text" id="bankName" required>
+
+            <label for="accountNumber">Account Number:</label>
+            <input type="text" id="accountNumber" required>
+
+            <label for="ifscCode">IFSC Code:</label>
+            <input type="text" id="ifscCode" required>
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <div id="bankDetails" class="hidden">
+            <h3>Entered Bank Details</h3>
+            <p><strong>Account Holder:</strong> <span id="displayHolder"></span></p>
+            <p><strong>Bank Name:</strong> <span id="displayBank"></span></p>
+            <p><strong>Account Number:</strong> <span id="displayAccount"></span></p>
+            <p><strong>IFSC Code:</strong> <span id="displayIfsc"></span></p>
+            <button id="editBtn">Edit</button>
+        </div>
+        <button onclick="goBack()">Back to Dashboard</button>
+    </div>
+
+    <script>
+        document.getElementById('bankForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            document.getElementById('displayHolder').innerText = document.getElementById('holderName').value;
+            document.getElementById('displayBank').innerText = document.getElementById('bankName').value;
+            document.getElementById('displayAccount').innerText = document.getElementById('accountNumber').value;
+            document.getElementById('displayIfsc').innerText = document.getElementById('ifscCode').value;
+            document.getElementById('bankForm').classList.add('hidden');
+            document.getElementById('bankDetails').classList.remove('hidden');
+        });
+        
+        document.getElementById('editBtn').addEventListener('click', function() {
+            document.getElementById('bankForm').classList.remove('hidden');
+            document.getElementById('bankDetails').classList.add('hidden');
+        });
+        
+        function goBack() {
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Registration</title>
+  <style>
+    /* General Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      animation: fadeInBg 1.5s ease-in-out;
+    }
+
+    @keyframes fadeInBg {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .register-container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      width: 350px;
+      animation: slideIn 1s ease-in-out;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateY(-30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .register-image {
+      width: 80px;
+      height: auto;
+      margin-bottom: 10px;
+      animation: bounce 1.5s infinite alternate ease-in-out;
+    }
+
+    @keyframes bounce {
+      from { transform: translateY(0); }
+      to { transform: translateY(-5px); }
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    /* Input Fields */
+    .input-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .input-group label {
+      position: absolute;
+      left: 10px;
+      top: 12px;
+      color: #777;
+      font-size: 14px;
+      transition: all 0.3s ease-in-out;
+      pointer-events: none;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px 10px;
+      border: 2px solid #ddd;
+      border-radius: 6px;
+      font-size: 16px;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    .input-group input:focus {
+      border-color: #764ba2;
+      box-shadow: 0px 0px 8px rgba(118, 75, 162, 0.5);
+    }
+
+    .input-group input:focus + label,
+    .input-group input:not(:placeholder-shown) + label {
+      top: -10px;
+      left: 5px;
+      font-size: 12px;
+      color: #764ba2;
+      background: white;
+      padding: 0 5px;
+    }
+
+    /* Button */
+    button {
+      width: 100%;
+      background: #764ba2;
+      color: white;
+      border: none;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    button:hover {
+      background: #5a3c8b;
+      transform: scale(1.05);
+    }
+
+    /* Error & Success Messages */
+    #error-message, #success-message {
+      margin-top: 10px;
+      font-size: 14px;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    #error-message.show, #success-message.show {
+      display: block;
+      opacity: 1;
+    }
+
+    /* Links */
+    p {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    a {
+      color: #764ba2;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease-in-out;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: #5a3c8b;
+    }
+  </style>
+</head>
+<body>
+  <div class="register-container">
+    <img src="/Users/balagangadhar/Downloads/logo.png" alt="Register" class="register-image">
+    <h2>Create an Account</h2>
+    <form id="registerForm">
+      <div class="input-group">
+        <input type="text" id="studentId" name="studentId" required placeholder=" ">
+        <label for="studentId">Student ID</label>
+      </div>
+      <div class="input-group">
+        <input type="email" id="email" name="email" required placeholder=" ">
+        <label for="email">Email</label>
+      </div>
+      <div class="input-group">
+        <input type="password" id="password" name="password" required placeholder=" ">
+        <label for="password">Password</label>
+      </div>
+      <div class="input-group">
+        <input type="password" id="confirmPassword" name="confirmPassword" required placeholder=" ">
+        <label for="confirmPassword">Confirm Password</label>
+      </div>
+      <button type="submit" id="registerBtn">Register</button>
+      <p id="error-message" style="color: red;"></p>
+      <p id="success-message" style="color: green;">Account created successfully!</p>
+    </form>
+    <p>Already have an account? <a href="index.html">Login here</a></p>
+  </div>
+
+  <script>
+    document.getElementById("registerForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      let studentId = document.getElementById("studentId").value.trim();
+      let email = document.getElementById("email").value.trim();
+      let password = document.getElementById("password").value.trim();
+      let confirmPassword = document.getElementById("confirmPassword").value.trim();
+      let errorMessage = document.getElementById("error-message");
+      let successMessage = document.getElementById("success-message");
+
+      errorMessage.classList.remove("show");
+      successMessage.classList.remove("show");
+
+      if (studentId === "" || email === "" || password === "" || confirmPassword === "") {
+        showError("All fields are required!");
+        return;
+      }
+
+      if (!/^\d{4,10}$/.test(studentId)) {
+        showError("Student ID must be a number (4-10 digits).");
+        return;
+      }
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showError("Invalid email format.");
+        return;
+      }
+
+      if (password.length < 6) {
+        showError("Password must be at least 6 characters.");
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        showError("Passwords do not match!");
+        return;
+      }
+
+      successMessage.classList.add("show");
+
+      setTimeout(() => {
+        alert("Registration successful!");
+        window.location.href = "index.html";
+      }, 1500);
+    });
+
+    function showError(message) {
+      let errorMessage = document.getElementById("error-message");
+      errorMessage.innerText = message;
+      errorMessage.classList.add("show");
+    }
+  </script>
+</body>
+</html>
